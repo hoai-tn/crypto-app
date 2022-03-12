@@ -6,7 +6,7 @@ import Tabs from "./navigation/Tabs";
 import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
-import rootReducer from "./stores/tab/rootReducer";
+import rootReducer from "./stores/rootReducer";
 
 const Stack = createStackNavigator();
 

@@ -5,7 +5,6 @@ const initialState = {
 const tabReducer = (state = initialState, action) => {
   switch (action.type) {
     case TabActions.SET_TRADE_MODAL_VISIBILITY:
-      console.log(action.payload);
       return {
         ...state,
         isTradeModalVisible: action.payload,

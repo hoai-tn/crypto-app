@@ -48,6 +48,13 @@ const Tabs = ({ isTradeModalVisible, setTradeModalVisibility }) => {
               <TabIcon focused={focused} icon={icons.home} label="Home" />
             ),
         }}
+        listeners={{
+          tabPress: (e) => {
+            if (isTradeModalVisible) {
+              e.preventDefault();
+            }
+          },
+        }}
       />
       <Tab.Screen
         name="Portfolio"
@@ -62,6 +69,13 @@ const Tabs = ({ isTradeModalVisible, setTradeModalVisibility }) => {
               />
             ),
         }}
+        listeners={{
+          tabPress: (e) => {
+            if (isTradeModalVisible) {
+              e.preventDefault();
+            }
+          },
+        }}
       />
       <Tab.Screen
         name="Trade"
@@ -70,7 +84,7 @@ const Tabs = ({ isTradeModalVisible, setTradeModalVisibility }) => {
           tabBarIcon: ({ focused }) => (
             <TabIcon
               focused={focused}
-              icon={icons.trade}
+              icon={isTradeModalVisible ? icons.close : icons.trade}
               label="Trade"
               isTrade={true}
             />
@@ -92,6 +106,13 @@ const Tabs = ({ isTradeModalVisible, setTradeModalVisibility }) => {
               <TabIcon focused={focused} icon={icons.market} label="Market" />
             ),
         }}
+        listeners={{
+          tabPress: (e) => {
+            if (isTradeModalVisible) {
+              e.preventDefault();
+            }
+          },
+        }}
       />
       <Tab.Screen
         name="Profile"
@@ -101,6 +122,13 @@ const Tabs = ({ isTradeModalVisible, setTradeModalVisibility }) => {
             !isTradeModalVisible && (
               <TabIcon focused={focused} icon={icons.profile} label="Profile" />
             ),
+        }}
+        listeners={{
+          tabPress: (e) => {
+            if (isTradeModalVisible) {
+              e.preventDefault();
+            }
+          },
         }}
       />
     </Tab.Navigator>
