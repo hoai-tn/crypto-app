@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { getHoldings, getCoinMarket } from "../stores/market/marketAction";
 import { useFocusEffect } from "@react-navigation/native";
 import { SIZES, COLORS, FONTS, dummyData, icons } from "../constants";
-import { BalanceInfo } from "../components";
+import { BalanceInfo, IconTextButton, Chart } from "../components";
 const Home = ({ myHoldings, coins, getHoldings, getCoinMarket }) => {
   useFocusEffect(
     useCallback(() => {
@@ -13,6 +13,12 @@ const Home = ({ myHoldings, coins, getHoldings, getCoinMarket }) => {
       getCoinMarket();
     }, [])
   );
+  const totalWallet = myHoldings.reduce((a, b) => a + (b.total || 0), 0);
+  const valueChange = myHoldings.reduce(
+    (a, b) => a + (b.holdingValueChange7d || 0),
+    0
+  );
+  const percentChange = (valueChange / (totalWallet - valueChange)) * 100;
   function renderWalletInfoSection() {
     return (
       <View
@@ -25,10 +31,39 @@ const Home = ({ myHoldings, coins, getHoldings, getCoinMarket }) => {
       >
         <BalanceInfo
           title="Your wallet"
-          displayAmount="45,000"
-          changePercent="2.30"
+          displayAmount={totalWallet}
+          changePercent={percentChange}
           containerStyle={{ marginTop: 50 }}
         />
+        <View
+          style={{
+            flexDirection: "row",
+            marginTop: 30,
+            marginBottom: -15,
+            paddingHorizontal: SIZES.radius,
+          }}
+        >
+          <IconTextButton
+            label="Transfer"
+            icon={icons.send}
+            containerStyle={{
+              flex: 1,
+              height: 40,
+              marginRight: SIZES.radius,
+            }}
+            onPress={() => console.log("transfer")}
+          />
+
+          <IconTextButton
+            label="Withdraw"
+            icon={icons.withdraw}
+            containerStyle={{
+              flex: 1,
+              height: 40,
+            }}
+            onPress={() => console.log("Withdraw")}
+          />
+        </View>
       </View>
     );
   }
@@ -43,6 +78,7 @@ const Home = ({ myHoldings, coins, getHoldings, getCoinMarket }) => {
         {/* Header - Wallet Info */}
         {renderWalletInfoSection()}
         {/* Chart */}
+
         {/* Top Cryptocurrency */}
       </View>
     </MainLayout>
