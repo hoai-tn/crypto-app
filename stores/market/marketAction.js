@@ -115,6 +115,7 @@ export const getCoinMarket = (
       const getCoinMarketAPI = await axios.get(apiURL);
       // console.log(getCoinMarketAPI.status);
       if (getCoinMarketAPI.state == 200) {
+        console.log('get coin market api',getCoinMarketAPI.currentPrice);
         dispatch(getCoinMarketSuccess(getCoinMarketAPI.data));
       } else {
         dispatch(getCoinMarketFailure(getCoinMarketAPI.data));
