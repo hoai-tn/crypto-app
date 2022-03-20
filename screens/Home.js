@@ -78,6 +78,10 @@ const Home = ({ myHoldings, coins, getHoldings, getCoinMarket }) => {
         {/* Header - Wallet Info */}
         {renderWalletInfoSection()}
         {/* Chart */}
+        <Chart
+          containerStyle={{ marginTop: SIZES.padding * 2 }}
+          // chartPrices={coins[0].sparkline_in_7d?.price}
+        />
 
         {/* Top Cryptocurrency */}
       </View>
